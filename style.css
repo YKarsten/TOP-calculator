@@ -8,16 +8,18 @@ background-color: rgba(0, 0, 0, 0.818);
   position:absolute;
   top:15%;
 
+  border-radius: 5%;
   height: 60vh;
   width: 50vw;
-  background-color: palevioletred;
+  background-color: whitesmoke;
   
 }
 
 #screen{
   background-color: rgb(70, 151, 222);
-  margin: 3em 4em 7em 4em;
+  margin: 3em 4em 5em 4em;
   padding: 3vh;
+  box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 .gridWrapper{
@@ -27,8 +29,9 @@ background-color: rgba(0, 0, 0, 0.818);
 
   background-color: goldenrod;
 
+  border-radius: 0 0 5% 5%;
   gap: 1em;
-
+  padding: 20px 0 20px 0;
   grid-template-columns: repeat(4, 12vw);
   grid-template-rows: repeat(5, 8vh);
 }
@@ -39,6 +42,9 @@ background-color: rgba(0, 0, 0, 0.818);
   height: 8vh;
   width: 7vw;
   justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 
