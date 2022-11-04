@@ -1,0 +1,53 @@
+body{
+display: flex;
+justify-content: center;
+background-color: rgba(0, 0, 0, 0.818);
+}
+
+.calcBody {
+  position:absolute;
+  top:15%;
+
+  height: 60vh;
+  width: 50vw;
+  background-color: palevioletred;
+  
+}
+
+#screen{
+  background-color: rgb(70, 151, 222);
+  margin: 3em 4em 7em 4em;
+  padding: 3vh;
+}
+
+.gridWrapper{
+  display: grid;
+  justify-items: center;
+
+
+  background-color: goldenrod;
+
+  gap: 1em;
+
+  grid-template-columns: repeat(4, 12vw);
+  grid-template-rows: repeat(5, 8vh);
+}
+
+.button{
+  display: flex;
+  background-color: brown;
+  height: 8vh;
+  width: 7vw;
+  justify-content: center;
+}
+
+
+#sum{
+  grid-row-start:4 ;
+  grid-column-start: 4;
+  grid-row-end: 6;
+
+
+  height: auto;
+  background-color: aquamarine;
+}
