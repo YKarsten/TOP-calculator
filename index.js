@@ -151,7 +151,11 @@ for(let i=1; i<numIn.length; i++){
         display.textContent = zwischenSumme
     }else if(operatorsIn[i-1] =="/"){
         zwischenSumme = divide(zwischenSumme, parseInt(numIn[i]))
-        display.textContent = zwischenSumme
+        // Catch divison by 0 (results in Infinity)
+        if (isFinite(zwischenSumme)){
+            display.textContent = zwischenSumme
+        }
+        display.textContent = "Error"
     }else if(operatorsIn[i-1] =="%"){
         zwischenSumme = add(zwischenSumme, parseInt(numIn[i]))
         display.textContent = zwischenSumme
