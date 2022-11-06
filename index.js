@@ -15,6 +15,11 @@ function multiply(num1, num2){
 function divide(num1, num2){
     return num1/num2;
 }
+// modulo
+function modulo(num1, num2){
+    return num1%num2;
+}
+
 // Create a function called operator that takes one of the above functions and 2 numbers.
 function operate(operator, num1, num2){
     switch(operator){
@@ -32,7 +37,8 @@ function operate(operator, num1, num2){
 //Get the screen div to display inputs
 let display= document.getElementById("screen")
 
-
+// Map the buttons to the screen output
+function displayInput(){
 const zero = document.getElementById("zero");
 zero.addEventListener("click", ()=>{
     display.textContent += "0";
@@ -103,9 +109,10 @@ plus.addEventListener("click", ()=>{
     display.textContent += "+";
 })
 
-const sum = document.getElementById("sum");
-sum.addEventListener("click", ()=>{
-    display.textContent += "=";
+
+const modulo = document.getElementById("modulo");
+modulo.addEventListener("click", ()=>{
+    display.textContent += "%";
 })
 
 const undo = document.getElementById("undo");
@@ -117,3 +124,43 @@ const clear = document.getElementById("clear");
 clear.addEventListener("click", ()=>{
     display.textContent = "";
 })
+}
+
+const sum = document.getElementById("sum");
+sum.addEventListener("click", ()=>{
+    // Extract the numerical values 
+    let numIn = display.textContent.split(/\W/) 
+    console.table(numIn)
+
+    // Extract the operators
+    let operatorsIn = display.textContent.replace(/[0-9]/g, "")
+    operatorsIn = operatorsIn.split("")
+    console.table(operatorsIn)
+ 
+    let zwischenSumme = parseInt(numIn[0]);
+
+for(let i=1; i<numIn.length; i++){
+    if      (operatorsIn[i-1] =="+"){
+        zwischenSumme = add(zwischenSumme, parseInt(numIn[i]))
+        display.textContent = zwischenSumme
+    }else if(operatorsIn[i-1] =="-"){
+        zwischenSumme = subtract(zwischenSumme, parseInt(numIn[i]))
+        display.textContent = zwischenSumme
+    }else if(operatorsIn[i-1] =="*"){
+        zwischenSumme = multiply(zwischenSumme, parseInt(numIn[i]))
+        display.textContent = zwischenSumme
+    }else if(operatorsIn[i-1] =="/"){
+        zwischenSumme = divide(zwischenSumme, parseInt(numIn[i]))
+        display.textContent = zwischenSumme
+    }else if(operatorsIn[i-1] =="%"){
+        zwischenSumme = add(zwischenSumme, parseInt(numIn[i]))
+        display.textContent = zwischenSumme
+    }else{
+        display.textContent = "Error"
+    } 
+}
+})
+
+
+
+displayInput()
