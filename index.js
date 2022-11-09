@@ -20,20 +20,6 @@ function modulo(num1, num2){
     return num1%num2;
 }
 
-// // Create a function called operator that takes one of the above functions and 2 numbers.
-// function operate(operator, num1, num2){
-//     switch(operator){
-//         case add:
-//             return add(num1, num2);
-//         case subtract:
-//             return subtract(num1, num2);
-//         case multiply:
-//             return multiply(num1, num2);
-//         case divide:
-//             return divide(num1, num2);
-//     }
-// }
-
 //Get the screen div to display inputs
 let display= document.getElementById("screen")
 
@@ -156,10 +142,10 @@ for(let i=1; i<numIn.length; i++){
     }else if(operatorsIn[i-1] =="/"){
         zwischenSumme = divide(zwischenSumme, parseInt(numIn[i]))
         // Catch divison by 0 (results in Infinity)
-        if (isFinite(zwischenSumme)){
-            display.textContent = zwischenSumme
+        if (numIn[1]===0){
+            display.textContent = "Never divide by 0"
         }
-        display.textContent = "Error"
+        display.textContent = zwischenSumme
     }else if(operatorsIn[i-1] =="%"){
         zwischenSumme = add(zwischenSumme, parseInt(numIn[i]))
         display.textContent = zwischenSumme
@@ -170,8 +156,8 @@ for(let i=1; i<numIn.length; i++){
 })
 
 
-const op = document.querySelectorAll("div.operator");
-addEventListenerList(op, 'click', calc); 
+const operation = document.querySelectorAll("div.operator");
+addEventListenerList(operation, 'click', calc); 
 
 function addEventListenerList(list, event, fn) {
     for (let i = 0; i < list.length; i++) {
@@ -202,7 +188,7 @@ function calc(){
                 display.textContent = multiply(parseInt(numIn[0]),parseInt(numIn[1]))
                 display.textContent += operatorsIn[1]
                 break;
-            case "-":
+            case "/":
                 display.textContent = divide(parseInt(numIn[0]),parseInt(numIn[1]))
                 display.textContent += operatorsIn[1]
                 break;
