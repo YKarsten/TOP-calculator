@@ -20,22 +20,24 @@ function modulo(num1, num2){
     return num1%num2;
 }
 
-// Create a function called operator that takes one of the above functions and 2 numbers.
-function operate(operator, num1, num2){
-    switch(operator){
-        case add:
-            return add(num1, num2);
-        case subtract:
-            return subtract(num1, num2);
-        case multiply:
-            return multiply(num1, num2);
-        case divide:
-            return divide(num1, num2);
-    }
-}
+// // Create a function called operator that takes one of the above functions and 2 numbers.
+// function operate(operator, num1, num2){
+//     switch(operator){
+//         case add:
+//             return add(num1, num2);
+//         case subtract:
+//             return subtract(num1, num2);
+//         case multiply:
+//             return multiply(num1, num2);
+//         case divide:
+//             return divide(num1, num2);
+//     }
+// }
 
 //Get the screen div to display inputs
 let display= document.getElementById("screen")
+
+
 
 // Map the buttons to the screen output
 function displayInput(){
@@ -126,16 +128,18 @@ clear.addEventListener("click", ()=>{
 })
 }
 
+displayInput()
+
 const sum = document.getElementById("sum");
 sum.addEventListener("click", ()=>{
     // Extract the numerical values 
     let numIn = display.textContent.split(/\W/) 
-    console.table(numIn)
+    // console.table(numIn)
 
     // Extract the operators
     let operatorsIn = display.textContent.replace(/[0-9]/g, "")
     operatorsIn = operatorsIn.split("")
-    console.table(operatorsIn)
+    // console.table(operatorsIn)
  
     let zwischenSumme = parseInt(numIn[0]);
 
@@ -166,5 +170,42 @@ for(let i=1; i<numIn.length; i++){
 })
 
 
+const op = document.querySelectorAll("div.operator");
+addEventListenerList(op, 'click', calc); 
 
-displayInput()
+function addEventListenerList(list, event, fn) {
+    for (let i = 0; i < list.length; i++) {
+        list[i].addEventListener(event, fn);
+    }
+}
+
+function calc(){
+    let numIn = display.textContent.split(/\W/) 
+    // numIn =numIn.split("")
+
+    let operatorsIn = display.textContent.replace(/[0-9]/g, "")
+    operatorsIn = operatorsIn.split("")
+
+    // for some reason numIn always has an additional empty element, 
+    // so we check for "3" number
+    if(Object.keys(numIn).length === 3){
+        switch(operatorsIn[0]){
+            case "+":
+                display.textContent = add(parseInt(numIn[0]),parseInt(numIn[1]))
+                display.textContent += operatorsIn[1]
+                break;
+            case "-":
+                display.textContent = subtract(parseInt(numIn[0]),parseInt(numIn[1]))
+                display.textContent += operatorsIn[1]
+                break;
+            case "*":
+                display.textContent = multiply(parseInt(numIn[0]),parseInt(numIn[1]))
+                display.textContent += operatorsIn[1]
+                break;
+            case "-":
+                display.textContent = divide(parseInt(numIn[0]),parseInt(numIn[1]))
+                display.textContent += operatorsIn[1]
+                break;
+        }
+    }
+}

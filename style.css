@@ -47,8 +47,8 @@
  
   height: 100%;
   width: 100%;
-
-  box-sizing: border-box;
+/* box sizing:border-box doesnt force the border into adjacent divs */
+  box-sizing: border-box; 
   border: 5px solid #003049;
   border-radius: 2px;
 
