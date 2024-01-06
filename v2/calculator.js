@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function() {
 // Draw Calculator
 function createGrid() {
     const gridContainer = document.querySelector(".calculator");
+    const display = document.querySelector(".display");
+
+    // Set initial blinking effect
+    display.classList.add("blinking");
 
     for (let i = 0; i < 20; i++) {
         const gridItem = document.createElement('div');
@@ -19,11 +23,14 @@ function createGrid() {
         item.style.height = "200px";
     });
 
-    btnText = ["AC", "( )", "%", "/", 7, 8, 9, "X", 4, 5, 6, "-", 1, 2, 3, "+", 0, ",", "\u232B", "="]
+    btnText = ["AC", "( )", "%", "/", 7, 8, 9, "X", 4, 5, 6, "-", 1, 2, 3, "+", 0, ",", "\u232B", "="];
+    
     gridItems.forEach((button, index) =>{
         button.textContent = btnText[index].toString();
         button.addEventListener("click", () => {
-            console.log(btnText[index]);
+            // Stop the blinking effect on click
+            display.classList.remove("blinking");
+            display.textContent += (btnText[index]);
         })
     });
 }

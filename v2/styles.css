@@ -8,25 +8,51 @@ body {
   background-color: #f0f0f0;
 }
 
-.calculator {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #fff;
-    width: 800px;
-    height: 1000px;
-  }
-  
-.grid-item {
-    background-color: #eea2a2e7;
-    border: 5px solid #fff;
-    box-sizing: border-box;
-    border-radius: 50%;
-
-    text-align: center;
-    font-size: 5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.container {
+  display: flex;
+  flex-direction: column;
 }
-  
+
+.display {
+  width: 800px;
+  height: 200px;
+  background-color: #fff;
+  font-size: 3em;
+  box-sizing: border-box;
+  border: 15px solid rebeccapurple;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.display.blinking {
+  animation: blink 3s infinite;
+}
+
+@keyframes blink {
+  30% {
+      opacity: 0.5;
+  }
+}
+
+.calculator {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  width: 800px;
+  height: 1000px;
+}
+
+.grid-item {
+  background-color: #eea2a2e7;
+  border: 5px solid #fff;
+  box-sizing: border-box;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
