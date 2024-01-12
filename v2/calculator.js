@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   createGrid();
-  calculate(); 
+  simpleMathOperators();
 
   // Draw Calculator
   function createGrid() {
@@ -24,86 +24,104 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Button functionality
-    btnText = ["AC", "( )", "%", "/", 7, 8, 9, "X", 4, 5, 6, "-", 1, 2, 3, "+", 0, ",", "\u232B", "="];
+    btnText = [
+      "AC",
+      "( )",
+      "%",
+      "/",
+      7,
+      8,
+      9,
+      "X",
+      4,
+      5,
+      6,
+      "-",
+      1,
+      2,
+      3,
+      "+",
+      0,
+      ",",
+      "\u232B",
+      "=",
+    ];
 
     gridItems.forEach((button, index) => {
       button.textContent = btnText[index].toString();
-      button.addEventListener("click", () => {
-        // Stop the blinking effect on click
-        display.classList.remove("blinking");
-        display.textContent += btnText[index];
+    });
+  }
+
+  // simple math operators
+  function simpleMathOperators() {
+    const operatorButtons = document.querySelectorAll(".grid-item");
+
+    operatorButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        let display = document.querySelector(".display");
+        let calculation = display.textContent;
+
+        if (isMathOperator(btn.textContent)) {
+          // If the clicked button is a math operator
+          let [num1, operator, num2] = splitCalculation(calculation);
+          // check for a valid calculation and perform the calculation
+          if (num1 !== undefined && operator !== undefined && num2 !== undefined) {
+            display.textContent = performCalculation(parseFloat(num1), operator, parseFloat(num2));
+            display.classList.remove("blinking");
+            display.textContent += btn.textContent;
+          } else {
+            display.classList.remove("blinking");
+            display.textContent += btn.textContent;
+          }
+        } else {
+          // If the clicked button is a number or other symbol, update the display
+          display.textContent += btn.textContent;
+        }
       });
     });
   }
 
+  function isMathOperator(text) {
+    const mathOperators = ["+", "-", "X", "/"];
+    return mathOperators.includes(text);
+  }
 
-  // simple math operators
-  const simpleMathOperators = calculate();
-  console.log(simpleMathOperators);
-  
-  function calculate() {
-    const operatorButtons = document.querySelectorAll('.grid-item');
-    const mathOperatorButtons = [];
+  function splitCalculation(calculation) {
+    return calculation.split(/([-+X/])/).filter(Boolean);
+  }
 
-    operatorButtons.forEach(button => {
-        if (isMathOperator(button.textContent)) {
-            mathOperatorButtons.push(button);
-        }
-    });
-    return mathOperatorButtons;
+  function performCalculation(num1, operator, num2) {
+    switch (operator) {
+      case "+":
+        return add(num1, num2);
+      case "-":
+        return subtract(num1, num2);
+      case "X":
+        return multiply(num1, num2);
+      case "/":
+        return divide(num1, num2);
+      default:
+        return "Error";
     }
-    
-    function isMathOperator(text) {
-        const mathOperators = ["+", "-", "X", "/"];
-        return mathOperators.includes(text);
-    }
+  }
 
+  function add(a, b) {
+    return a + b;
+  }
+
+  function subtract(a, b) {
+    return a - b;
+  }
+
+  function multiply(a, b) {
+    return a * b;
+  }
+
+  function divide(a, b) {
+    if (b !== 0) {
+      return a / b;
+    } else {
+      return "Error";
+    }
+  }
 });
-
-//   function add(num1, num2) {
-//     return num1 + num2;
-//   }
-
-//   function subtract(num1, num2) {
-//     return num1 - num2;
-//   }
-
-//   function multiply(num1, num2) {
-//     return num1 * num2;
-//   }
-
-//   function divide(num1, num2) {
-//     return num1 / num2;
-//   }
-
-//   function selectDivByText(textToFind) {
-//     const divs = document.querySelectorAll(".grid-item");
-
-//     for (const div of divs) {
-//       if (div.textContent.trim() === textToFind.trim()) {
-//         return div;
-//       }
-//     }
-//     return null;
-//   }
-
-
-  // let num1 = document.querySelector();
-  // let num2 = document.querySelector();
-  // let operator = document.querySelector();
-
-//   function operate(num1, num2, operator) {
-//     switch (operator) {
-//       case "add":
-//         add(num1, num2);
-//       case "subtract":
-//         subtract(num1, num2);
-//       case "multiply":
-//         multiply(num1, num2);
-//       case "divide":
-//         divide(num1, num2);
-//       default:
-//         return NaN;
-//     }
-//   }
-
