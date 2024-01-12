@@ -80,7 +80,10 @@ document.addEventListener("DOMContentLoaded", function () {
           } else if (btn.textContent === "\u232B"){
             console.log("jap geklickt")
             display.textContent = display.textContent.slice(0, -1);
-          } 
+          } else if (btn.textContent === "%") {
+            display.textContent = parseFloat(display.textContent)/100;
+            display.textContent += "%";
+          }
         } else{
           // If the clicked button is a number
           display.classList.remove("blinking");
