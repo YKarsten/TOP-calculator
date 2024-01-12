@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
       3,
       "+",
       0,
-      ",",
+      ".",
       "\u232B",
       "=",
     ];
@@ -65,16 +65,25 @@ document.addEventListener("DOMContentLoaded", function () {
           // If the clicked button is a math operator
           let [num1, operator, num2] = splitCalculation(calculation);
           // check for a valid calculation and perform the calculation
-          if (num1 !== undefined && operator !== undefined && num2 !== undefined) {
+          if (num1 !== undefined && operator !== undefined && num2 !== undefined){
             display.textContent = performCalculation(parseFloat(num1), operator, parseFloat(num2));
-            display.classList.remove("blinking");
+            if (!btn.textContent.includes("=")) {
             display.textContent += btn.textContent;
+            }
           } else {
-            display.classList.remove("blinking");
             display.textContent += btn.textContent;
           }
-        } else {
-          // If the clicked button is a number or other symbol, update the display
+          // If the clicked button is a special operator
+        } else if (isSpecialOperator(btn.textContent)){
+          if (btn.textContent === "AC") {
+            display.textContent = "";
+          } else if (btn.textContent === "\u232B"){
+            console.log("jap geklickt")
+            display.textContent = display.textContent.slice(0, -1);
+          } 
+        } else{
+          // If the clicked button is a number
+          display.classList.remove("blinking");
           display.textContent += btn.textContent;
         }
       });
@@ -82,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function isMathOperator(text) {
-    const mathOperators = ["+", "-", "X", "/"];
+    const mathOperators = ["+", "-", "X", "/", "="];
     return mathOperators.includes(text);
   }
 
@@ -124,4 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return "Error";
     }
   }
+
+  function isSpecialOperator(text) {
+    const specialOperators = ["AC", "()", "%", "\u232B"];
+    return specialOperators.includes(text);
+  }
+
 });
